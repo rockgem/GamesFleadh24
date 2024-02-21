@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
-
+var dash_cooldown : float  = 0
 
 func _ready () : 
 	update_animation_parameters(starting_direction)
@@ -15,12 +15,19 @@ func _physics_process(_delta):
 	var input_direction = Vector2(
 	
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
-		Input.get_action_strength("down") - Input.get_action_strength("up")
-	) 
+		Input.get_action_strength("down") - Input.get_action_strength("up"),
+	).normalized()
 	
 	update_animation_parameters(input_direction)
 	
-	velocity = input_direction * move_speed
+	if(Input.is_action_pressed("space") == true && dash_cooldown <= 0):
+		velocity = (input_direction* move_speed)*20
+		dash_cooldown = 5
+	else:
+		velocity = input_direction * move_speed
+		if(0 < dash_cooldown and dash_cooldown <= 5 ):
+			dash_cooldown = dash_cooldown - 0.025
+		
 	
 	move_and_slide()
 	
