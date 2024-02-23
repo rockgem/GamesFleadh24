@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://7jtmd4tibdeb"]
+
+[ext_resource type="Texture2D" uid="uid://c1wkenqp2crac" path="res://Art/Skeleton-Sheet.png" id="1_a38lw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_amr4k"]
+size = Vector2(14, 14)
+
+[sub_resource type="Animation" id="Animation_xekxf"]
+resource_name = "Attack"
+length = 0.3
+loop_mode = 1
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Skeleton-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.225, 0.275),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_whpby"]
+resource_name = "Idle"
+length = 1.3
+loop_mode = 1
+step = 0.165
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Skeleton-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.165, 0.33, 0.495, 0.66, 0.825, 0.99, 1.155),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_5cgtf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Skeleton-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jqxrx"]
+resource_name = "Walking"
+length = 1.1
+loop_mode = 1
+step = 0.165
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/Skeleton-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.165, 0.33, 0.495, 0.66, 0.825, 0.99),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvgyl"]
+_data = {
+"Attack": SubResource("Animation_xekxf"),
+"Idle": SubResource("Animation_whpby"),
+"RESET": SubResource("Animation_5cgtf"),
+"Walking": SubResource("Animation_jqxrx")
+}
+
+[node name="Skeleton" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_amr4k")
+
+[node name="Skeleton-sheet" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("1_a38lw")
+hframes = 21
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xvgyl")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]

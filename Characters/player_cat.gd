@@ -13,7 +13,6 @@ func _ready () :
 func _physics_process(_delta):
 	
 	var input_direction = Vector2(
-	
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up"),
 	).normalized()
@@ -37,6 +36,8 @@ func update_animation_parameters (move_input : Vector2):
 	if(move_input != Vector2.ZERO): 
 		animation_tree.set ("parameters/Walk/blend_position",move_input)
 		animation_tree.set ("parameters/Idle/blend_position",move_input)
+		var state:String = state_machine.get_current_node()
+		print(state)
 
 
 func pick_new_state() : 
