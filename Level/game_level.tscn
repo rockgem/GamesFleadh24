@@ -901,4 +901,4 @@ position = Vector2(231, 134)
 position = Vector2(87, 16)
 
 [node name="Knight" parent="." instance=ExtResource("9_dqsew")]
-position = Vector2(341, 136)
+position = Vector2(261, 133)
