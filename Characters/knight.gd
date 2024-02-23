@@ -12,10 +12,7 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			print("Left button was clicked at ", event.position)
 
-#trying to make the attack here but it's still quite random 
-func _process(delta): 
-	if Input.is_mouse_button_pressed(1) : 
-		$AnimationPlayer.play("attack_right") 
+
 
 func _physics_process(_delta):
 	var input_direction = Vector2(
