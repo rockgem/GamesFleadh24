@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuyofhu0lkiht"]
+[gd_scene load_steps=12 format=3 uid="uid://cuyofhu0lkiht"]
 
 [ext_resource type="Script" path="res://Portal.gd" id="1_s6c5q"]
 [ext_resource type="Texture2D" uid="uid://d00bkmjesdgnk" path="res://Art/Portal-Sheet.png" id="2_kov05"]
@@ -90,6 +90,13 @@ _data = {
 "RESET": SubResource("Animation_og0hf")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xnu63"]
+animation = &"Arriving"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_o4s0f"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_xnu63")
+blend_point_0/pos = 0.0
+
 [node name="Portal" type="Area2D"]
 script = ExtResource("1_s6c5q")
 
@@ -113,5 +120,14 @@ libraries = {
 "": SubResource("AnimationLibrary_73u8f")
 }
 
-[connection signal="ready" from="PortalInteract" to="." method="_on_collision_shape_2d_ready"]
-[connection signal="visibility_changed" from="PortalInteract" to="." method="_on_collision_shape_2d_visibility_changed"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../PortalInteract")
+libraries = {
+"": SubResource("AnimationLibrary_73u8f")
+}
+tree_root = SubResource("AnimationNodeBlendSpace1D_o4s0f")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = 0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
