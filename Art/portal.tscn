@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://cuyofhu0lkiht"]
+
+[ext_resource type="Script" path="res://Portal.gd" id="1_s6c5q"]
+[ext_resource type="Texture2D" uid="uid://d00bkmjesdgnk" path="res://Art/Portal-Sheet.png" id="2_kov05"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5dkc4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l8cq3"]
+radius = 7.0
+height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f0rky"]
+radius = 14.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_23r2r"]
+resource_name = "Arriving"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Portal-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StaticBody2D/PortalCollision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_cggyh"]
+resource_name = "Pissoff"
+
+[sub_resource type="Animation" id="Animation_og0hf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Portal-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_73u8f"]
+_data = {
+"Arriving": SubResource("Animation_23r2r"),
+"Pissoff": SubResource("Animation_cggyh"),
+"RESET": SubResource("Animation_og0hf")
+}
+
+[node name="Portal" type="Area2D"]
+script = ExtResource("1_s6c5q")
+
+[node name="Portal-sheet" type="Sprite2D" parent="."]
+texture = ExtResource("2_kov05")
+hframes = 13
+frame = 12
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_5dkc4")
+
+[node name="PortalCollision" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CapsuleShape2D_l8cq3")
+
+[node name="PortalInteract" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_f0rky")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PortalInteract")
+libraries = {
+"": SubResource("AnimationLibrary_73u8f")
+}
+
+[connection signal="ready" from="PortalInteract" to="." method="_on_collision_shape_2d_ready"]
+[connection signal="visibility_changed" from="PortalInteract" to="." method="_on_collision_shape_2d_visibility_changed"]
