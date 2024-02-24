@@ -109,9 +109,11 @@ frame = 12
 physics_material_override = SubResource("PhysicsMaterial_5dkc4")
 
 [node name="PortalCollision" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 shape = SubResource("CapsuleShape2D_l8cq3")
 
 [node name="PortalInteract" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_f0rky")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

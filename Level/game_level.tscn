@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ddel3dg1lauhh"]
+[gd_scene load_steps=19 format=3 uid="uid://ddel3dg1lauhh"]
 
 [ext_resource type="PackedScene" uid="uid://jyllfa3v7qf7" path="res://Characters/player_cat.tscn" id="1_wgm5o"]
 [ext_resource type="Texture2D" uid="uid://os310vj8033r" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="2_8il1s"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bg5xsnf1vb3aj" path="res://Characters/cow_1.tscn" id="8_kwush"]
 [ext_resource type="PackedScene" uid="uid://c6ct8uvratg22" path="res://Characters/knight.tscn" id="9_dqsew"]
 [ext_resource type="PackedScene" uid="uid://cuyofhu0lkiht" path="res://Art/portal.tscn" id="10_8q2p5"]
+[ext_resource type="PackedScene" uid="uid://7jtmd4tibdeb" path="res://Characters/Enemies/skeleton.tscn" id="11_y0rle"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oepm5"]
 texture = ExtResource("2_8il1s")
@@ -891,9 +892,13 @@ position = Vector2(231, 134)
 
 [node name="Cow1" parent="." instance=ExtResource("8_kwush")]
 position = Vector2(87, 16)
+collision_layer = 2
 
 [node name="Knight" parent="." instance=ExtResource("9_dqsew")]
 position = Vector2(261, 133)
 
 [node name="Portal" parent="." instance=ExtResource("10_8q2p5")]
 position = Vector2(259, 55)
+
+[node name="Skeleton" parent="." instance=ExtResource("11_y0rle")]
+position = Vector2(432, 81)
