@@ -1,4 +1,5 @@
-extends Node2D
+extends CharacterBody2D
+
 var speed = 25
 var player = null
 var chase = false

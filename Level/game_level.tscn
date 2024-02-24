@@ -869,6 +869,7 @@ position = Vector2(1, 6)
 
 [node name="PlayerCat" parent="." instance=ExtResource("1_wgm5o")]
 position = Vector2(231, 134)
+collision_layer = 3
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PlayerCat"]
 remote_path = NodePath("../../Camera2D")
@@ -892,13 +893,14 @@ position = Vector2(231, 134)
 
 [node name="Cow1" parent="." instance=ExtResource("8_kwush")]
 position = Vector2(87, 16)
-collision_layer = 2
+collision_mask = 2
 
 [node name="Knight" parent="." instance=ExtResource("9_dqsew")]
 position = Vector2(261, 133)
+collision_layer = 3
 
 [node name="Portal" parent="." instance=ExtResource("10_8q2p5")]
 position = Vector2(259, 55)
 
 [node name="Skeleton" parent="." instance=ExtResource("11_y0rle")]
-position = Vector2(432, 81)
+position = Vector2(369, 103)
