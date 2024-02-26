@@ -9,6 +9,7 @@ var speed = 50
 var player_chase = false
 var player = null
 var total_damage_received = 0
+var max_health = 3
 var health = 3
 var player_in_attack_zone = false
 
@@ -50,19 +51,12 @@ func _on_slime_hitbox_body_exited(body):
 		player_in_attack_zone = false
 
 func deal_with_damage():
-	if health > 0 and player_in_attack_zone and Global.player_current_attack and total_damage_received < health:
+	if player_in_attack_zone and Global.player_current_attack and total_damage_received < max_health:
 		health -= 1
 		total_damage_received += 1
 		print(\"Slime health =\", health)
-
 		if health <= 0:
-			die()
-
-func die():
-	print(\"Enemy defeated\")
-	self.queue_free()
-	# Reset total_damage_received for the next encounter
-	total_damage_received = 0
+			self.queue_free()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nlp5u"]
