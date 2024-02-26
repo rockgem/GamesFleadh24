@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ddel3dg1lauhh"]
+[gd_scene load_steps=18 format=3 uid="uid://ddel3dg1lauhh"]
 
 [ext_resource type="PackedScene" uid="uid://jyllfa3v7qf7" path="res://Characters/player_cat.tscn" id="1_wgm5o"]
 [ext_resource type="Texture2D" uid="uid://os310vj8033r" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="2_8il1s"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b8wgltbgrh00k" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Fences.png" id="7_py0yo"]
 [ext_resource type="PackedScene" uid="uid://bg5xsnf1vb3aj" path="res://Characters/cow_1.tscn" id="8_kwush"]
 [ext_resource type="PackedScene" uid="uid://c6ct8uvratg22" path="res://Characters/knight.tscn" id="9_mb25t"]
+[ext_resource type="PackedScene" uid="uid://ikrift07toj6" path="res://Characters/Enemies/slime.tscn" id="10_xts4r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oepm5"]
 texture = ExtResource("2_8il1s")
@@ -898,8 +899,11 @@ position = Vector2(231, 134)
 position = Vector2(87, 16)
 
 [node name="Knight" parent="." instance=ExtResource("9_mb25t")]
-position = Vector2(245, 82)
+position = Vector2(264, 70)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 position = Vector2(231, 134)
 remote_path = NodePath("../Camera2D")
+
+[node name="Slime" parent="." instance=ExtResource("10_xts4r")]
+position = Vector2(197, 79)

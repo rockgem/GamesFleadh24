@@ -1,7 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://c6ct8uvratg22"]
+[gd_scene load_steps=31 format=3 uid="uid://c6ct8uvratg22"]
 
 [ext_resource type="Texture2D" uid="uid://c5hvk7f1x0y5p" path="res://Art/Knight-Sheet.png" id="1_by1jc"]
-[ext_resource type="Script" path="res://Characters/knight.gd" id="1_ug341"]
+[ext_resource type="Script" path="res://Characters/scripts/knight.gd" id="1_kr5b2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l4id"]
 size = Vector2(16, 16)
@@ -215,15 +215,17 @@ states/attack_right/node = SubResource("AnimationNodeAnimation_uuyag")
 states/attack_right/position = Vector2(488, 198)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_371o7"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_f18op"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jh81v"), "Idle", "attack_right", SubResource("AnimationNodeStateMachineTransition_j1byp"), "attack_right", "Idle", SubResource("AnimationNodeStateMachineTransition_qajkx"), "Idle", "attack_left", SubResource("AnimationNodeStateMachineTransition_q3qth"), "attack_left", "Idle", SubResource("AnimationNodeStateMachineTransition_6al5p"), "Walk", "attack_right", SubResource("AnimationNodeStateMachineTransition_hnsf5"), "attack_right", "Walk", SubResource("AnimationNodeStateMachineTransition_opnvo"), "attack_left", "Walk", SubResource("AnimationNodeStateMachineTransition_dwwrb"), "Walk", "attack_left", SubResource("AnimationNodeStateMachineTransition_gct6g")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fs8eg"]
+
 [node name="Knight" type="CharacterBody2D"]
-collision_layer = 2
-script = ExtResource("1_ug341")
+collision_layer = 3
+script = ExtResource("1_kr5b2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_by1jc")
 flip_h = true
 hframes = 18
-frame = 16
+frame = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6l4id")
@@ -239,3 +241,19 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Idle/blend_position = 0
 parameters/Walk/blend_position = 0
+
+[node name="player_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
+shape = SubResource("CircleShape2D_fs8eg")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="deal_attack_timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
+[connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]

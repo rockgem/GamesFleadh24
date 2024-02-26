@@ -98,4 +98,4 @@ func _on_attack_cooldown_timeout():
 
 func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
-	Gobal.player_current_attack = false
+	Global.player_current_attack = false
