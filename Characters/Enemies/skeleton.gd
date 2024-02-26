@@ -11,6 +11,7 @@ var alive = true
 
 func _physics_process(delta):
 	if chase == true:
+		move_and_slide()
 		position += (player.position - position)/speed
 		#state_machine.travel("Walk")
 
