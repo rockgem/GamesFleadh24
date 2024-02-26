@@ -216,13 +216,14 @@ states/attack_right/position = Vector2(488, 198)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_371o7"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_f18op"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jh81v"), "Idle", "attack_right", SubResource("AnimationNodeStateMachineTransition_j1byp"), "attack_right", "Idle", SubResource("AnimationNodeStateMachineTransition_qajkx"), "Idle", "attack_left", SubResource("AnimationNodeStateMachineTransition_q3qth"), "attack_left", "Idle", SubResource("AnimationNodeStateMachineTransition_6al5p"), "Walk", "attack_right", SubResource("AnimationNodeStateMachineTransition_hnsf5"), "attack_right", "Walk", SubResource("AnimationNodeStateMachineTransition_opnvo"), "attack_left", "Walk", SubResource("AnimationNodeStateMachineTransition_dwwrb"), "Walk", "attack_left", SubResource("AnimationNodeStateMachineTransition_gct6g")]
 
 [node name="Knight" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_ug341")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_by1jc")
 flip_h = true
 hframes = 18
-frame = 15
+frame = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6l4id")
