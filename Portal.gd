@@ -17,7 +17,6 @@ func _on_body_exited(body):
 func _process(delta):
 		state_machine.travel("Idle")
 		if complete == true:
-			state_machine.travel("Arriving")
 			if entered == true:
 				if Input.is_action_just_pressed("use"):
 					print("I READ THE FUCKING INPUT DIPSHIT")
@@ -25,7 +24,5 @@ func _process(delta):
 
 func condition_met():
 	var complete = true
-	if complete == true:
-		print("Oh the condition thing works")
-		state_machine.travel("Arriving")
-		#animation_tree.set("parameters/Arriving/blend_position", complete)
+	print("Oh the condition thing works")
+	state_machine.travel("Arriving")
