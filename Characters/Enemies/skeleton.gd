@@ -14,6 +14,12 @@ func _physics_process(delta):
 		move_and_slide()
 		position += (player.position - position)/speed
 		state_machine.travel("Walk")
+		#Postions the npc towards the player
+		if(player.position.x - position.x) < 0 :
+			$"Skeleton-sheet".flip_h = true
+		else:
+			$"Skeleton-sheet".flip_h = false
+			 
 	else:
 		state_machine.travel("Idle")
 		
