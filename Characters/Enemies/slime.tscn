@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ikrift07toj6"]
+[gd_scene load_steps=18 format=3 uid="uid://tu1wd2y0fuch"]
 
 [ext_resource type="Texture2D" uid="uid://dawxkc7shv5ys" path="res://Art/Slime-Sheet.png" id="1_2qm5j"]
 
@@ -9,13 +9,14 @@ var speed = 50
 var player_chase = false
 var player = null
 var total_damage_received = 0
-var health = 3
+var health = 10
 var player_in_attack_zone = false
 
 func _physics_process(delta):
 	deal_with_damage()
 	
 	if player_chase:
+		move_and_slide()
 		position += (player.position - position)/speed
 		
 		$AnimatedSprite2D.play(\"idle\")
@@ -50,19 +51,19 @@ func _on_slime_hitbox_body_exited(body):
 		player_in_attack_zone = false
 
 func deal_with_damage():
-	if health > 0 and player_in_attack_zone and Global.player_current_attack and total_damage_received < health:
+	if health > 0 and player_in_attack_zone and Global.player_current_attack:
 		health -= 1
 		total_damage_received += 1
-		print(\"Slime health =\", health)
+		print(\"Slime health:\", health)
 
-		if health <= 0:
-			die()
+	if health == 0:
+		die()
 
 func die():
 	print(\"Enemy defeated\")
 	self.queue_free()
 	# Reset total_damage_received for the next encounter
-	total_damage_received = 0
+	
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nlp5u"]

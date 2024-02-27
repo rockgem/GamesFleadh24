@@ -32,6 +32,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_baj60"]
 resource_name = "attack_left"
@@ -60,6 +72,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_yq1kg"]
 resource_name = "attack_right"
@@ -75,6 +99,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_bu0jv"]
@@ -216,6 +252,7 @@ states/attack_right/position = Vector2(488, 198)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_371o7"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_f18op"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jh81v"), "Idle", "attack_right", SubResource("AnimationNodeStateMachineTransition_j1byp"), "attack_right", "Idle", SubResource("AnimationNodeStateMachineTransition_qajkx"), "Idle", "attack_left", SubResource("AnimationNodeStateMachineTransition_q3qth"), "attack_left", "Idle", SubResource("AnimationNodeStateMachineTransition_6al5p"), "Walk", "attack_right", SubResource("AnimationNodeStateMachineTransition_hnsf5"), "attack_right", "Walk", SubResource("AnimationNodeStateMachineTransition_opnvo"), "attack_left", "Walk", SubResource("AnimationNodeStateMachineTransition_dwwrb"), "Walk", "attack_left", SubResource("AnimationNodeStateMachineTransition_gct6g")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fs8eg"]
+radius = 28.1603
 
 [node name="Knight" type="CharacterBody2D"]
 collision_layer = 3
@@ -236,9 +273,11 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cpkp6")
+}
 tree_root = SubResource("AnimationNodeStateMachine_ios4x")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Idle/blend_position = 0
 parameters/Walk/blend_position = 0
 
