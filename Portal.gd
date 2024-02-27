@@ -4,7 +4,7 @@ extends Area2D
 @onready var state_machine = animation_tree.get("parameters/playback")
 
 var entered = false
-var complete = true
+var complete = false
 
 func _on_body_entered(body:PhysicsBody2D):
 	print("Entered")

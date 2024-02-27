@@ -13,9 +13,12 @@ func _physics_process(delta):
 	if chase == true:
 		move_and_slide()
 		position += (player.position - position)/speed
-		#state_machine.travel("Walk")
-
+		state_machine.travel("Walk")
+	else:
+		state_machine.travel("Idle")
+		
 func _on_area_2d_body_entered(body:PhysicsBody2D):
 	player = body
 	chase = true
+	
 	
