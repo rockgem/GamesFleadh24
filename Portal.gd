@@ -4,7 +4,7 @@ extends Area2D
 @onready var state_machine = animation_tree.get("parameters/playback")
 
 var entered = false
-var complete = false
+var complete = true
 
 func _on_body_entered(body:PhysicsBody2D):
 	print("Entered")
@@ -17,6 +17,7 @@ func _on_body_exited(body):
 func _process(delta):
 		state_machine.travel("Idle")
 		if complete == true:
+			state_machine.travel("Arriving")
 			if entered == true:
 				if Input.is_action_just_pressed("use"):
 					print("I READ THE FUCKING INPUT DIPSHIT")
