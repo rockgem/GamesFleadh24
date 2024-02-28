@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnlp0clhbjrq"]
+
+[ext_resource type="Texture2D" uid="uid://xt16kxk48eih" path="res://Art/menubg.png" id="1_cr6gh"]
+[ext_resource type="Script" path="res://Characters/scripts/main_menu.gd" id="1_eef5k"]
+[ext_resource type="FontFile" uid="uid://v6mc4g27x0vw" path="res://Art/Fonts/Minecraft.ttf" id="2_0tgdo"]
+[ext_resource type="FontFile" uid="uid://y4cojyvsm5wg" path="res://Art/Fonts/m5x7.ttf" id="3_bismi"]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eef5k")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cr6gh")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_fonts/font = ExtResource("2_0tgdo")
+theme_override_font_sizes/font_size = 80
+text = "M E M O I R"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Startbtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bismi")
+theme_override_font_sizes/font_size = 64
+text = "Start Game"
+
+[node name="Seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Quitbtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bismi")
+theme_override_font_sizes/font_size = 64
+text = "Quit"

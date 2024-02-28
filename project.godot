@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Testing1"
-run/main_scene="res://Level/game_level.tscn"
-config/features=PackedStringArray("4.2", "Mobile")
+run/main_scene="res://MainMenu/main_menu.tscn"
+config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,8 +24,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="canvas_items"
-window/stretch/scale=2.8
+window/stretch/scale=2.3
 
 [editor_plugins]
 
