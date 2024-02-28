@@ -236,9 +236,11 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cpkp6")
+}
 tree_root = SubResource("AnimationNodeStateMachine_ios4x")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Idle/blend_position = 0
 parameters/Walk/blend_position = 0
 

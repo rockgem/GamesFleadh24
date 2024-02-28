@@ -1,9 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://7jtmd4tibdeb"]
+[gd_scene load_steps=18 format=3 uid="uid://7jtmd4tibdeb"]
 
+[ext_resource type="Script" path="res://Characters/Enemies/skeleton.gd" id="1_78eto"]
 [ext_resource type="Texture2D" uid="uid://c1wkenqp2crac" path="res://Art/Skeleton-Sheet.png" id="1_a38lw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_amr4k"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8udl7"]
 size = Vector2(14, 14)
+
+[sub_resource type="GDScript" id="GDScript_pn2w7"]
+script/source = "extends Area2D
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ts625"]
+radius = 35.3553
 
 [sub_resource type="Animation" id="Animation_xekxf"]
 resource_name = "Attack"
@@ -13,14 +21,14 @@ step = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/Skeleton-sheet:frame")
+tracks/0/path = NodePath("Skeleton-sheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15, 0.225, 0.275),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.002, 0.1, 0.15, 0.225, 0.275),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [16, 17, 18, 19, 20]
+"values": [16, 19, 17, 18, 19, 20]
 }
 
 [sub_resource type="Animation" id="Animation_whpby"]
@@ -31,7 +39,7 @@ step = 0.165
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/Skeleton-sheet:frame")
+tracks/0/path = NodePath("Skeleton-sheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -46,7 +54,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/Skeleton-sheet:frame")
+tracks/0/path = NodePath("Skeleton-sheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -64,7 +72,7 @@ step = 0.165
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/Skeleton-sheet:frame")
+tracks/0/path = NodePath("Skeleton-sheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -82,17 +90,50 @@ _data = {
 "Walking": SubResource("Animation_jqxrx")
 }
 
-[node name="Skeleton" type="Node2D"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cfabs"]
+animation = &"Idle"
 
-[node name="Area2D" type="Area2D" parent="."]
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_r55no"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_cfabs")
+blend_point_0/pos = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_opy0p"]
+animation = &"Walking"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_quhta"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_opy0p")
+blend_point_0/pos = 0.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cssxr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rrpgr"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_loybb"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace1D_r55no")
+states/Idle/position = Vector2(384, 100.667)
+states/Start/position = Vector2(174.667, 99.1111)
+states/Walk/node = SubResource("AnimationNodeBlendSpace1D_quhta")
+states/Walk/position = Vector2(584, 106.593)
+transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_cssxr"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rrpgr")]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_78eto")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_amr4k")
+shape = SubResource("RectangleShape2D_8udl7")
 
-[node name="Skeleton-sheet" type="Sprite2D" parent="Area2D"]
+[node name="Skeleton-sheet" type="Sprite2D" parent="."]
 texture = ExtResource("1_a38lw")
 hframes = 21
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+script = SubResource("GDScript_pn2w7")
+
+[node name="AreaDetection" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ts625")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -100,3 +141,12 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xvgyl")
+}
+tree_root = SubResource("AnimationNodeStateMachine_loybb")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Idle/blend_position = 0
+parameters/Walk/blend_position = 0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
