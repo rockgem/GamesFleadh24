@@ -8,11 +8,17 @@ var player_alive = true
 var attack_ip = false #attack in progress
 
 @onready var animation_tree = $AnimationTree
-
 @onready var state_machine = animation_tree.get("parameters/playback")
-
+@onready var actionable_finder : Area2D = $Direction/ActionableFinder
 
 @export var move_speed : float = 75
+
+func _unhandled_input(event : InputEvent):
+	if Input.is_action_just_pressed ("dialogue_button") : 
+		var actionables = actionable_finder.get_overlapping_areas()
+		if actionables.size() > 0 : 
+			actionables[0].action()
+			return
 
 func _physics_process(_delta):
 	enemy_attack()
