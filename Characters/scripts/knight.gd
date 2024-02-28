@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
-var health = 10000
+var health = 100
 var player_alive = true
 
 var attack_ip = false #attack in progress
@@ -18,14 +18,12 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			$AnimationPlayer.play("attack_right")
-			$deal_attack_timer.start() 
 			Global.player_current_attack = true
 
 #trying to make the attack here but it's still quite random 
 func _process(delta): 
 	if Input.is_mouse_button_pressed(1) : 
-		$AnimationPlayer.play("attack_right")
-		$deal_attack_timer.start() 
+		$AnimationPlayer.play("attack_right") 
 		Global.player_current_attack = true
 
 func _physics_process(_delta):
@@ -70,33 +68,22 @@ func pick_new_state():
 func player():
 	pass
 
-func _on_player_hitbox_body_entered(body):
+func _on_player_hit_box_body_entered(body):
 	if body.has_method("enemy"):
 		enemy_in_attack_range = true
 
-
-func _on_player_hitbox_body_exited(body):
+func _on_player_hit_box_body_exited(body):
 	if body.has_method("enemy"):
 		enemy_in_attack_range = false
 
 func enemy_attack():
-	if enemy_in_attack_range and enemy_attack_cooldown and Global.player_current_attack:
-		health -= 1
+	if enemy_in_attack_range and enemy_attack_cooldown == true:
+		health = health - 20
 		enemy_attack_cooldown = false
-		$AttackCooldown.start()
-		print("Player health:", health)
+		$attack_cooldown.start()
+		print(health)
 
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
-
-
-func _on_deal_attack_timer_timeout():
-	$deal_attack_timer.stop()
-	Global.player_current_attack = false
-
-# Add a short delay before allowing the player to attack again
-	await(get_tree().create_timer(0.2))
 	
-	# Reset the attack cooldown
-	enemy_attack_cooldown = true

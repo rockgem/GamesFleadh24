@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://tu1wd2y0fuch"]
+[gd_scene load_steps=17 format=3 uid="uid://tu1wd2y0fuch"]
 
 [ext_resource type="Texture2D" uid="uid://dawxkc7shv5ys" path="res://Art/Slime-Sheet.png" id="1_2qm5j"]
 
@@ -25,17 +25,7 @@ func _physics_process(delta):
 			$AnimatedSprite2D.flip_h = true
 		else:
 			$AnimatedSprite2D.flip_h = false
-	
 
-
-func _on_detecting_area_body_entered(body):
-	player = body
-	player_chase = true
-
-
-func _on_detecting_area_body_exited(body):
-	player = null
-	player_chase = false
 
 func enemy():
 	pass
@@ -51,19 +41,11 @@ func _on_slime_hitbox_body_exited(body):
 		player_in_attack_zone = false
 
 func deal_with_damage():
-	if health > 0 and player_in_attack_zone and Global.player_current_attack:
-		health -= 1
-		total_damage_received += 1
-		print(\"Slime health:\", health)
-
-	if health == 0:
-		die()
-
-func die():
-	print(\"Enemy defeated\")
-	self.queue_free()
-	# Reset total_damage_received for the next encounter
-	
+	if player_in_attack_zone and Global.player_current_attack == true:
+		health = health - 20
+		print(\"Slime health =\", health)
+		if health <= 0:
+			self.queue_free()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nlp5u"]
@@ -151,13 +133,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6x2vg"]
-radius = 33.1361
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ptwk6"]
 radius = 9.05539
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p0yd1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6oi6"]
 
 [node name="Slime" type="CharacterBody2D"]
 script = SubResource("GDScript_qlemh")
@@ -168,17 +147,7 @@ animation = &"idle"
 frame_progress = 0.462966
 offset = Vector2(0, -4)
 
-[node name="detecting_area" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detecting_area"]
-visible = false
-position = Vector2(0, -3)
-shape = SubResource("CircleShape2D_6x2vg")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_ptwk6")
 
@@ -186,9 +155,7 @@ shape = SubResource("CircleShape2D_ptwk6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime_hitbox"]
 position = Vector2(0, -3)
-shape = SubResource("CircleShape2D_p0yd1")
+shape = SubResource("CircleShape2D_w6oi6")
 
-[connection signal="body_entered" from="detecting_area" to="." method="_on_detecting_area_body_entered"]
-[connection signal="body_exited" from="detecting_area" to="." method="_on_detecting_area_body_exited"]
 [connection signal="body_entered" from="slime_hitbox" to="." method="_on_slime_hitbox_body_entered"]
 [connection signal="body_exited" from="slime_hitbox" to="." method="_on_slime_hitbox_body_exited"]
