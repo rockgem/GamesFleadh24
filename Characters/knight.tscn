@@ -216,6 +216,8 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_33qoi"]
 radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_tgl2d"]
+radius = 13.0
 
 [node name="Knight" type="CharacterBody2D"]
 collision_layer = 3
@@ -259,3 +261,14 @@ wait_time = 0.8
 [connection signal="body_exited" from="player_hit_box" to="." method="_on_player_hit_box_body_exited"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]
+[node name="Direction" type="Marker2D" parent="."]
+
+[node name="ActionableFinder" type="Area2D" parent="Direction"]
+position = Vector2(-1, 0)
+rotation = -3.14159
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/ActionableFinder"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_tgl2d")
