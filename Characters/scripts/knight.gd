@@ -14,18 +14,6 @@ var attack_ip = false #attack in progress
 
 @export var move_speed : float = 75
 
-func _input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			$AnimationPlayer.play("attack_right")
-			Global.player_current_attack = true
-
-#trying to make the attack here but it's still quite random 
-func _process(delta): 
-	if Input.is_mouse_button_pressed(1) : 
-		$AnimationPlayer.play("attack_right") 
-		Global.player_current_attack = true
-
 func _physics_process(_delta):
 	enemy_attack()
 	
@@ -59,9 +47,12 @@ func update_animation_parameters(move_input: Vector2):
 func pick_new_state():
 	if velocity != Vector2.ZERO:
 		state_machine.travel("Walk")
-	elif Global.player_current_attack:
+	if Input.is_action_pressed("mouse_left"):
 		# Ensure that the attack animation continues until it finishes
 		state_machine.travel("attack_right")
+		Global.player_current_attack = true
+		attack_ip = true
+		$deal_attack_timer.start()
 	else:
 		state_machine.travel("Idle")
 
@@ -86,4 +77,11 @@ func enemy_attack():
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
-	
+	print("Check timer2")
+
+
+func _on_deal_attack_timer_timeout():
+
+	$deal_attack_timer.stop()
+	Global.player_current_attack = false
+	attack_ip = false
