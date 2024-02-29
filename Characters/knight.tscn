@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c6ct8uvratg22"]
+[gd_scene load_steps=32 format=3 uid="uid://c6ct8uvratg22"]
 
 [ext_resource type="Texture2D" uid="uid://c5hvk7f1x0y5p" path="res://Art/Knight-Sheet.png" id="1_by1jc"]
 [ext_resource type="Script" path="res://Characters/scripts/knight.gd" id="1_kr5b2"]
@@ -216,6 +216,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_33qoi"]
 radius = 8.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgl2d"]
 radius = 13.0
 
@@ -227,7 +228,7 @@ script = ExtResource("1_kr5b2")
 texture = ExtResource("1_by1jc")
 flip_h = true
 hframes = 18
-frame = 15
+frame = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_6l4id")
@@ -238,11 +239,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_cpkp6")
-}
 tree_root = SubResource("AnimationNodeStateMachine_ios4x")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/Idle/blend_position = 0
 parameters/Walk/blend_position = 0
 
@@ -257,10 +256,6 @@ wait_time = 0.5
 [node name="deal_attack_timer" type="Timer" parent="."]
 wait_time = 0.8
 
-[connection signal="body_entered" from="player_hit_box" to="." method="_on_player_hit_box_body_entered"]
-[connection signal="body_exited" from="player_hit_box" to="." method="_on_player_hit_box_body_exited"]
-[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
-[connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]
 [node name="Direction" type="Marker2D" parent="."]
 
 [node name="ActionableFinder" type="Area2D" parent="Direction"]
@@ -272,3 +267,22 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/ActionableFinder"]
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_tgl2d")
+
+[node name="regen-timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(0.192157, 0.576471, 0.235294, 1)
+offset_left = -7.0
+offset_top = 9.0
+offset_right = 143.0
+offset_bottom = 36.0
+scale = Vector2(0.1, 0.1)
+show_percentage = false
+
+[connection signal="body_entered" from="player_hit_box" to="." method="_on_player_hit_box_body_entered"]
+[connection signal="body_exited" from="player_hit_box" to="." method="_on_player_hit_box_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="deal_attack_timer" to="." method="_on_deal_attack_timer_timeout"]
+[connection signal="timeout" from="regen-timer" to="." method="_on_regentimer_timeout"]

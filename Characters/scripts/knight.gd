@@ -8,20 +8,15 @@ var player_alive = true
 var attack_ip = false #attack in progress
 
 @onready var animation_tree = $AnimationTree
+
 @onready var state_machine = animation_tree.get("parameters/playback")
-@onready var actionable_finder : Area2D = $Direction/ActionableFinder
+
 
 @export var move_speed : float = 75
 
-func _unhandled_input(event : InputEvent):
-	if Input.is_action_just_pressed ("dialogue_button") : 
-		var actionables = actionable_finder.get_overlapping_areas()
-		if actionables.size() > 0 : 
-			actionables[0].action()
-			return
-
 func _physics_process(_delta):
 	enemy_attack()
+	update_health()
 	
 	if health <= 0:
 		player_alive = false  # add endscreen
@@ -91,3 +86,32 @@ func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
 	Global.player_current_attack = false
 	attack_ip = false
+
+func update_health():
+	var healthbar = $HealthBar
+	healthbar.value = health
+	
+	if health >= 10:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true
+
+func _on_regentimer_timeout():
+	if health < 10:
+		health = health + 2
+		if health > 10:
+			health = 10
+	if health <= 0:
+		health = 0
+
+
+
+
+
+
+
+
+
+
+
+
