@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ddel3dg1lauhh"]
+[gd_scene load_steps=25 format=3 uid="uid://ddel3dg1lauhh"]
 
 [ext_resource type="Texture2D" uid="uid://os310vj8033r" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="2_8il1s"]
 [ext_resource type="Texture2D" uid="uid://ckojgy2cpfy6f" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Hills.png" id="3_teesx"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://djty2wg4vgr0l" path="res://Helpers/actionable.tscn" id="9_sli8g"]
 [ext_resource type="Resource" uid="uid://cvl4x2ey4ypjy" path="res://Dialogues/main.dialogue" id="10_7ipyx"]
 [ext_resource type="PackedScene" uid="uid://tu1wd2y0fuch" path="res://Characters/Enemies/slime.tscn" id="10_xts4r"]
+[ext_resource type="PackedScene" uid="uid://bcjk1ca1jbbsf" path="res://MainMenu/paused_menu.tscn" id="14_7sxd3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oepm5"]
 texture = ExtResource("2_8il1s")
@@ -1122,3 +1123,7 @@ remote_path = NodePath("../Camera2D")
 
 [node name="Slime" parent="." instance=ExtResource("10_xts4r")]
 position = Vector2(197, 79)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PausedMenu" parent="CanvasLayer" instance=ExtResource("14_7sxd3")]

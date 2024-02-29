@@ -82,7 +82,6 @@ func _on_attack_cooldown_timeout():
 
 
 func _on_deal_attack_timer_timeout():
-
 	$deal_attack_timer.stop()
 	Global.player_current_attack = false
 	attack_ip = false
@@ -103,15 +102,4 @@ func _on_regentimer_timeout():
 			health = 10
 	if health <= 0:
 		health = 0
-
-
-
-
-
-
-
-
-
-
-
 
