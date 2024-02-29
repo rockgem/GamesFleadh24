@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://7jtmd4tibdeb"]
+[gd_scene load_steps=19 format=3 uid="uid://7jtmd4tibdeb"]
 
 [ext_resource type="Script" path="res://Characters/Enemies/skeleton.gd" id="1_78eto"]
 [ext_resource type="Texture2D" uid="uid://c1wkenqp2crac" path="res://Art/Skeleton-Sheet.png" id="1_a38lw"]
@@ -117,6 +117,9 @@ states/Walk/node = SubResource("AnimationNodeBlendSpace1D_quhta")
 states/Walk/position = Vector2(584, 106.593)
 transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_cssxr"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_rrpgr")]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6weav"]
+size = Vector2(23, 21)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_78eto")
 
@@ -129,6 +132,7 @@ texture = ExtResource("1_a38lw")
 hframes = 21
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 script = SubResource("GDScript_pn2w7")
 
@@ -149,4 +153,13 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = 0
 parameters/Walk/blend_position = 0
 
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_6weav")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

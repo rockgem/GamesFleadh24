@@ -6,12 +6,14 @@ extends CharacterBody2D
 var speed = 110
 var player = null
 var chase = false
-var alive = true
+var health = 120
 
+var player_in_attack_zone = false
 func enemy():
 	pass
 
 func _physics_process(delta):
+	deal_with_damage()
 	if chase == true:
 		move_and_slide()
 		position += (player.position - position)/speed
@@ -29,3 +31,17 @@ func _on_area_2d_body_entered(body):
 	if body.has_method("player"):
 		player = body
 		chase = true	
+
+func deal_with_damage():
+	if  player_in_attack_zone == true and Global.player_current_attack == true:
+			health = health - 20
+			print("Skeleton health =", health)
+			if health <= 0:
+				self.queue_free()
+
+
+func _on_hitbox_area_entered(body):
+		player_in_attack_zone = true
+
+func _on_hitbox_area_exited(body):
+		player_in_attack_zone = false
