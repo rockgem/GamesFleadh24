@@ -6,16 +6,20 @@ extends CharacterBody2D
 var speed = 110
 var player = null
 var chase = false
-var alive = true
+var health = 120
 
+var player_in_attack_zone = false
+func enemy():
+	pass
 
 func _physics_process(delta):
+	deal_with_damage()
 	if chase == true:
 		move_and_slide()
 		position += (player.position - position)/speed
 		state_machine.travel("Walk")
 		#Postions the npc towards the player
-		if(player.position.x - position.x) < 0 :
+		if(player.position.y - position.y) <= 0 :
 			$"Skeleton-sheet".flip_h = true
 		else:
 			$"Skeleton-sheet".flip_h = false
@@ -23,8 +27,21 @@ func _physics_process(delta):
 	else:
 		state_machine.travel("Idle")
 		
-func _on_area_2d_body_entered(body:CharacterBody2D):
-	player = body
-	chase = true
-	
-	
+func _on_area_2d_body_entered(body):
+	if body.has_method("player"):
+		player = body
+		chase = true	
+
+func deal_with_damage():
+	if  player_in_attack_zone == true and Global.player_current_attack == true:
+			health = health - 20
+			print("Skeleton health =", health)
+			if health <= 0:
+				self.queue_free()
+
+
+func _on_hitbox_area_entered(body):
+		player_in_attack_zone = true
+
+func _on_hitbox_area_exited(body):
+		player_in_attack_zone = false

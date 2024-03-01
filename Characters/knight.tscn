@@ -1,4 +1,5 @@
 [gd_scene load_steps=32 format=3 uid="uid://c6ct8uvratg22"]
+[gd_scene load_steps=32 format=3 uid="uid://c6ct8uvratg22"]
 
 [ext_resource type="Texture2D" uid="uid://c5hvk7f1x0y5p" path="res://Art/Knight-Sheet.png" id="1_by1jc"]
 [ext_resource type="Script" path="res://Characters/scripts/knight.gd" id="1_kr5b2"]
@@ -216,6 +217,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_33qoi"]
 radius = 8.0
+
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgl2d"]
 radius = 13.0

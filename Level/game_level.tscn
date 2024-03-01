@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=30 format=3 uid="uid://ddel3dg1lauhh"]
+=======
+[gd_scene load_steps=25 format=3 uid="uid://ddel3dg1lauhh"]
+>>>>>>> f44e5ebf1ba11c106de8fb15a6abc2e296a5d655
 
 [ext_resource type="Texture2D" uid="uid://os310vj8033r" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="2_8il1s"]
 [ext_resource type="Texture2D" uid="uid://ckojgy2cpfy6f" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Hills.png" id="3_teesx"]
