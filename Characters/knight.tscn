@@ -241,6 +241,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_ios4x")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/Idle/blend_position = 0
 parameters/Walk/blend_position = 0
 
@@ -280,6 +281,7 @@ offset_right = 143.0
 offset_bottom = 36.0
 scale = Vector2(0.1, 0.1)
 max_value = 10.0
+value = 10.0
 show_percentage = false
 
 [connection signal="body_entered" from="player_hit_box" to="." method="_on_player_hit_box_body_entered"]
