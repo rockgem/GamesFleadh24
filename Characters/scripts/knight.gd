@@ -2,26 +2,21 @@ extends CharacterBody2D
 
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
-var health = 100
+var health = 10
 var player_alive = true
 
 var attack_ip = false #attack in progress
 
 @onready var animation_tree = $AnimationTree
+
 @onready var state_machine = animation_tree.get("parameters/playback")
-@onready var actionable_finder : Area2D = $Direction/ActionableFinder
+
 
 @export var move_speed : float = 75
 
-func _unhandled_input(event : InputEvent):
-	if Input.is_action_just_pressed ("dialogue_button") : 
-		var actionables = actionable_finder.get_overlapping_areas()
-		if actionables.size() > 0 : 
-			actionables[0].action()
-			return
-
 func _physics_process(_delta):
 	enemy_attack()
+	update_health()
 	
 	if health <= 0:
 		player_alive = false  # add endscreen
@@ -44,11 +39,6 @@ func _physics_process(_delta):
 		$Sprite2D.flip_h = true
 
 	pick_new_state()
-
-func update_animation_parameters(move_input: Vector2):
-	if move_input != Vector2.ZERO:
-		animation_tree.set("parameters/Walk/blend_position", move_input)
-		animation_tree.set("parameters/Idle/blend_position", move_input)
 
 func pick_new_state():
 	if velocity != Vector2.ZERO:
@@ -75,7 +65,7 @@ func _on_player_hit_box_body_exited(body):
 
 func enemy_attack():
 	if enemy_in_attack_range and enemy_attack_cooldown == true:
-		health = health - 20
+		health = health - 1
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
 		print(health)
@@ -83,11 +73,29 @@ func enemy_attack():
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
-	print("Check timer2")
 
 
 func _on_deal_attack_timer_timeout():
-
 	$deal_attack_timer.stop()
 	Global.player_current_attack = false
 	attack_ip = false
+
+func update_health():
+	var healthbar = $HealthBar
+	healthbar.value = health
+	
+	if health >= 10:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true
+
+func _on_regentimer_timeout():
+	if health < 10:
+		health = health + 2
+		if health > 10:
+			health = 10
+	if health <= 0:
+		health = 0
+
+func player_shop_method():
+	pass

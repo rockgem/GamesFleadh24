@@ -5,27 +5,15 @@
 [sub_resource type="GDScript" id="GDScript_qlemh"]
 script/source = "extends CharacterBody2D
 
-var speed = 50
-var player_chase = false
 var player = null
-var health = 100
+var health = 3
 var player_in_attack_zone = false
-
 var can_take_damage = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	deal_with_damage()
-	
-	if player_chase:
-		move_and_slide()
-		position += (player.position - position)/speed
-		
-		$AnimatedSprite2D.play(\"idle\")
-		
-		if(player.position.x - position.x) < 0:
-			$AnimatedSprite2D.flip_h = true
-		else:
-			$AnimatedSprite2D.flip_h = false
+	update_health()
+	$AnimatedSprite2D.play(\"idle\")
 
 
 func enemy():
@@ -44,7 +32,7 @@ func _on_slime_hitbox_body_exited(body):
 func deal_with_damage():
 	if player_in_attack_zone and Global.player_current_attack == true:
 		if can_take_damage == true:
-			health = health - 20
+			health = health - 1
 			$take_damage_cooldown.start()
 			can_take_damage = false
 			print(\"Slime health =\", health)
@@ -54,6 +42,17 @@ func deal_with_damage():
 
 func _on_take_damage_cooldown_timeout():
 	can_take_damage = true
+
+func update_health():
+	var healthbar = $EnHealthBar
+	
+	healthbar.value = health
+	
+	if health >= 3:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true
+
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nlp5u"]
@@ -167,6 +166,16 @@ shape = SubResource("CircleShape2D_w6oi6")
 
 [node name="take_damage_cooldown" type="Timer" parent="."]
 wait_time = 0.51
+
+[node name="EnHealthBar" type="ProgressBar" parent="."]
+modulate = Color(0.639216, 0.101961, 0.329412, 1)
+offset_left = -6.0
+offset_top = 2.0
+offset_right = 114.0
+offset_bottom = 29.0
+scale = Vector2(0.1, 0.1)
+value = 100.0
+show_percentage = false
 
 [connection signal="body_entered" from="slime_hitbox" to="." method="_on_slime_hitbox_body_entered"]
 [connection signal="body_exited" from="slime_hitbox" to="." method="_on_slime_hitbox_body_exited"]
