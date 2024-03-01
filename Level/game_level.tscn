@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=30 format=3 uid="uid://ddel3dg1lauhh"]
-=======
-[gd_scene load_steps=25 format=3 uid="uid://ddel3dg1lauhh"]
->>>>>>> f44e5ebf1ba11c106de8fb15a6abc2e296a5d655
+[gd_scene load_steps=31 format=3 uid="uid://ddel3dg1lauhh"]
 
 [ext_resource type="Texture2D" uid="uid://os310vj8033r" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="2_8il1s"]
 [ext_resource type="Texture2D" uid="uid://ckojgy2cpfy6f" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Hills.png" id="3_teesx"]
@@ -22,6 +18,7 @@
 [ext_resource type="Script" path="res://Characters/scripts/shop.gd" id="16_avnkm"]
 [ext_resource type="Texture2D" uid="uid://c7runenwnlbur" path="res://Art/sampleshop.png" id="17_qy5hp"]
 [ext_resource type="PackedScene" uid="uid://nr2evqdjf884" path="res://MainMenu/shop.tscn" id="18_cfexi"]
+[ext_resource type="PackedScene" uid="uid://7jtmd4tibdeb" path="res://Characters/Enemies/skeleton.tscn" id="19_by0r3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oepm5"]
 texture = ExtResource("2_8il1s")
@@ -1158,5 +1155,8 @@ scale = Vector2(0.0703125, 0.071875)
 texture = ExtResource("17_qy5hp")
 
 [node name="Shop" parent="shop" instance=ExtResource("18_cfexi")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("19_by0r3")]
+position = Vector2(121, 147)
 
 [connection signal="body_entered" from="shop" to="shop" method="_on_body_entered"]

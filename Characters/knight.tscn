@@ -1,5 +1,4 @@
 [gd_scene load_steps=32 format=3 uid="uid://c6ct8uvratg22"]
-[gd_scene load_steps=32 format=3 uid="uid://c6ct8uvratg22"]
 
 [ext_resource type="Texture2D" uid="uid://c5hvk7f1x0y5p" path="res://Art/Knight-Sheet.png" id="1_by1jc"]
 [ext_resource type="Script" path="res://Characters/scripts/knight.gd" id="1_kr5b2"]
@@ -216,8 +215,7 @@ states/attack_right/position = Vector2(488, 198)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_371o7"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_f18op"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_jh81v"), "Idle", "attack_right", SubResource("AnimationNodeStateMachineTransition_j1byp"), "attack_right", "Idle", SubResource("AnimationNodeStateMachineTransition_qajkx"), "Idle", "attack_left", SubResource("AnimationNodeStateMachineTransition_q3qth"), "attack_left", "Idle", SubResource("AnimationNodeStateMachineTransition_6al5p"), "Walk", "attack_right", SubResource("AnimationNodeStateMachineTransition_hnsf5"), "attack_right", "Walk", SubResource("AnimationNodeStateMachineTransition_opnvo"), "attack_left", "Walk", SubResource("AnimationNodeStateMachineTransition_dwwrb"), "Walk", "attack_left", SubResource("AnimationNodeStateMachineTransition_gct6g")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_33qoi"]
-radius = 8.0
-
+radius = 11.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgl2d"]
 radius = 13.0
@@ -243,7 +241,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_ios4x")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/Idle/blend_position = 0
 parameters/Walk/blend_position = 0
 
@@ -259,6 +256,7 @@ wait_time = 0.5
 wait_time = 0.8
 
 [node name="Direction" type="Marker2D" parent="."]
+visible = false
 
 [node name="ActionableFinder" type="Area2D" parent="Direction"]
 position = Vector2(-1, 0)

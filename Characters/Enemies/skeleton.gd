@@ -23,7 +23,7 @@ func _physics_process(delta):
 			$"Skeleton-sheet".flip_h = true
 		else:
 			$"Skeleton-sheet".flip_h = false
-			 
+
 	else:
 		state_machine.travel("Idle")
 		
