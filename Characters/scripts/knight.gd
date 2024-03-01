@@ -103,3 +103,5 @@ func _on_regentimer_timeout():
 	if health <= 0:
 		health = 0
 
+func player_shop_method():
+	pass

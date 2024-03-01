@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ddel3dg1lauhh"]
+[gd_scene load_steps=30 format=3 uid="uid://ddel3dg1lauhh"]
 
 [ext_resource type="Texture2D" uid="uid://os310vj8033r" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Grass.png" id="2_8il1s"]
 [ext_resource type="Texture2D" uid="uid://ckojgy2cpfy6f" path="res://Art/Sprout Lands - Sprites - Basic pack/Sprout Lands - Sprites - Basic pack/Tilesets/Hills.png" id="3_teesx"]
@@ -14,6 +14,10 @@
 [ext_resource type="Resource" uid="uid://cvl4x2ey4ypjy" path="res://Dialogues/main.dialogue" id="10_7ipyx"]
 [ext_resource type="PackedScene" uid="uid://tu1wd2y0fuch" path="res://Characters/Enemies/slime.tscn" id="10_xts4r"]
 [ext_resource type="PackedScene" uid="uid://bcjk1ca1jbbsf" path="res://MainMenu/paused_menu.tscn" id="14_7sxd3"]
+[ext_resource type="PackedScene" uid="uid://cwg2802ftnvir" path="res://Art/coin.tscn" id="15_hf0pb"]
+[ext_resource type="Script" path="res://Characters/scripts/shop.gd" id="16_avnkm"]
+[ext_resource type="Texture2D" uid="uid://c7runenwnlbur" path="res://Art/sampleshop.png" id="17_qy5hp"]
+[ext_resource type="PackedScene" uid="uid://nr2evqdjf884" path="res://MainMenu/shop.tscn" id="18_cfexi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oepm5"]
 texture = ExtResource("2_8il1s")
@@ -1072,6 +1076,9 @@ sources/8 = SubResource("TileSetAtlasSource_o445k")
 [sub_resource type="CircleShape2D" id="CircleShape2D_87hul"]
 radius = 18.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hc1ha"]
+size = Vector2(55, 41)
+
 [node name="GameLevel" type="Node2D"]
 position = Vector2(-4, 5)
 
@@ -1127,3 +1134,25 @@ position = Vector2(197, 79)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PausedMenu" parent="CanvasLayer" instance=ExtResource("14_7sxd3")]
+
+[node name="Coin" parent="." instance=ExtResource("15_hf0pb")]
+position = Vector2(183, 128)
+
+[node name="Coin2" parent="." instance=ExtResource("15_hf0pb")]
+position = Vector2(192, 149)
+
+[node name="shop" type="Area2D" parent="."]
+script = ExtResource("16_avnkm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shop"]
+position = Vector2(426, 99)
+shape = SubResource("RectangleShape2D_hc1ha")
+
+[node name="Sprite2D" type="Sprite2D" parent="shop"]
+position = Vector2(422, 99)
+scale = Vector2(0.0703125, 0.071875)
+texture = ExtResource("17_qy5hp")
+
+[node name="Shop" parent="shop" instance=ExtResource("18_cfexi")]
+
+[connection signal="body_entered" from="shop" to="shop" method="_on_body_entered"]
