@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cuyofhu0lkiht"]
+[gd_scene load_steps=18 format=3 uid="uid://cuyofhu0lkiht"]
 
 [ext_resource type="Script" path="res://Portal.gd" id="1_s6c5q"]
 [ext_resource type="Texture2D" uid="uid://d00bkmjesdgnk" path="res://Art/Portal-Sheet.png" id="2_kov05"]
@@ -53,45 +53,6 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_og0hf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Portal-sheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../StaticBody2D/PortalCollision:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_cggyh"]
 resource_name = "Pissoff"
 loop_mode = 1
@@ -133,6 +94,45 @@ tracks/2/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_og0hf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Portal-sheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../StaticBody2D/PortalCollision:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_73u8f"]
 _data = {
 "Arriving": SubResource("Animation_23r2r"),
@@ -166,6 +166,9 @@ states/Idle/node = SubResource("AnimationNodeBlendSpace1D_6msea")
 states/Idle/position = Vector2(366.667, 101.556)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kdh7w"), "Idle", "Arriving", SubResource("AnimationNodeStateMachineTransition_ato4v")]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ydfj3"]
+size = Vector2(2212, 1248)
+
 [node name="Portal" type="Area2D"]
 script = ExtResource("1_s6c5q")
 
@@ -191,14 +194,19 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../PortalInteract")
-libraries = {
-"": SubResource("AnimationLibrary_73u8f")
-}
 tree_root = SubResource("AnimationNodeStateMachine_dk5nj")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/Arriving/blend_position = 0
 parameters/Idle/blend_position = 0
 
+[node name="enemies_detection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemies_detection"]
+position = Vector2(867, 473)
+shape = SubResource("RectangleShape2D_ydfj3")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="enemies_detection" to="." method="_on_enemies_detection_body_entered"]
+[connection signal="body_exited" from="enemies_detection" to="." method="_on_enemies_detection_body_exited"]

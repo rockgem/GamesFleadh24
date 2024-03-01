@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://Characters/scripts/shop.gd" id="16_avnkm"]
 [ext_resource type="Texture2D" uid="uid://c7runenwnlbur" path="res://Art/sampleshop.png" id="17_qy5hp"]
 [ext_resource type="PackedScene" uid="uid://nr2evqdjf884" path="res://MainMenu/shop.tscn" id="18_cfexi"]
-[ext_resource type="PackedScene" uid="uid://7jtmd4tibdeb" path="res://Characters/Enemies/skeleton.tscn" id="19_by0r3"]
+[ext_resource type="PackedScene" uid="uid://cuyofhu0lkiht" path="res://Art/portal.tscn" id="19_i2ek7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oepm5"]
 texture = ExtResource("2_8il1s")
@@ -1143,6 +1143,7 @@ position = Vector2(183, 128)
 position = Vector2(192, 149)
 
 [node name="shop" type="Area2D" parent="."]
+visible = false
 script = ExtResource("16_avnkm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shop"]
@@ -1156,7 +1157,22 @@ texture = ExtResource("17_qy5hp")
 
 [node name="Shop" parent="shop" instance=ExtResource("18_cfexi")]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("19_by0r3")]
-position = Vector2(121, 147)
+[node name="Portal" parent="." instance=ExtResource("19_i2ek7")]
+position = Vector2(135, 75)
+
+[node name="Slime2" parent="." instance=ExtResource("10_xts4r")]
+position = Vector2(90, 168)
+
+[node name="Slime3" parent="." instance=ExtResource("10_xts4r")]
+position = Vector2(368, 66)
+
+[node name="Slime4" parent="." instance=ExtResource("10_xts4r")]
+position = Vector2(386, 145)
+
+[node name="Slime5" parent="." instance=ExtResource("10_xts4r")]
+position = Vector2(297, 77)
+
+[node name="Slime6" parent="." instance=ExtResource("10_xts4r")]
+position = Vector2(335, 176)
 
 [connection signal="body_entered" from="shop" to="shop" method="_on_body_entered"]
