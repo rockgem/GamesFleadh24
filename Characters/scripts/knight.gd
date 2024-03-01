@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
-var health = 100
+var health = 10
 var player_alive = true
 
 var attack_ip = false #attack in progress
@@ -65,7 +65,7 @@ func _on_player_hit_box_body_exited(body):
 
 func enemy_attack():
 	if enemy_in_attack_range and enemy_attack_cooldown == true:
-		health = health - 20
+		health = health - 1
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
 		print(health)
@@ -73,7 +73,6 @@ func enemy_attack():
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
-	print("Check timer2")
 
 
 func _on_deal_attack_timer_timeout():

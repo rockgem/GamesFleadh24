@@ -7,9 +7,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_is_paused = !_is_paused
 
-
-
-
 func set_paused(value:bool) -> void:
 	_is_paused = value
 	get_tree().paused = _is_paused

@@ -7,12 +7,14 @@ var speed = 110
 var player = null
 var chase = false
 var health = 120
+var can_take_damage = true
 
 var player_in_attack_zone = false
 func enemy():
 	pass
 
 func _physics_process(delta):
+	update_health()
 	deal_with_damage()
 	if chase == true:
 		move_and_slide()
@@ -27,21 +29,46 @@ func _physics_process(delta):
 	else:
 		state_machine.travel("Idle")
 		
-func _on_area_2d_body_entered(body):
+func _on_skele_hitbox_body_entered(body):
 	if body.has_method("player"):
-		player = body
-		chase = true	
+		player_in_attack_zone = true
+
+
+func _on_skele_hitbox_body_exited(body):
+	if body.has_method("player"):
+		player_in_attack_zone = false  
 
 func deal_with_damage():
-	if  player_in_attack_zone == true and Global.player_current_attack == true:
-			health = health - 20
-			print("Skeleton health =", health)
+	if player_in_attack_zone and Global.player_current_attack == true:
+		if can_take_damage == true:
+			health = health - 1
+			$take_damage_cooldown.start()
+			can_take_damage = false
+			print("Skele health =", health)
 			if health <= 0:
 				self.queue_free()
 
+
+func _on_area_2d_body_entered(body):
+	if body.has_method("player"):
+		player = body
+		chase = true 
 
 func _on_hitbox_area_entered(body):
 		player_in_attack_zone = true
 
 func _on_hitbox_area_exited(body):
 		player_in_attack_zone = false
+
+func _on_take_damage_cooldown_timeout():
+	can_take_damage = true
+
+func update_health():
+	var healthbar = $SkeleBar
+	
+	healthbar.value = health
+	
+	if health >= 120:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true

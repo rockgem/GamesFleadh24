@@ -273,12 +273,13 @@ wait_time = 5.0
 autostart = true
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-modulate = Color(0.192157, 0.576471, 0.235294, 1)
+modulate = Color(0.705882, 0.372549, 0.403922, 1)
 offset_left = -7.0
 offset_top = 9.0
 offset_right = 143.0
 offset_bottom = 36.0
 scale = Vector2(0.1, 0.1)
+max_value = 10.0
 show_percentage = false
 
 [connection signal="body_entered" from="player_hit_box" to="." method="_on_player_hit_box_body_entered"]
