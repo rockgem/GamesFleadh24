@@ -23,61 +23,55 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_cr6gh")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="GameTitle" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -65.0
+offset_top = 26.0
+offset_right = 65.0
+offset_bottom = 45.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-
-[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="GameTitle" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 8
-theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/font = ExtResource("2_0tgdo")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 36
 text = "M E M O I R"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -55.0
+offset_right = 81.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 32
-alignment = 1
-
-[node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Startbtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
+[node name="Endless Mode" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bismi")
-theme_override_font_sizes/font_size = 64
+text = "Endless Mode"
+
+[node name="Start" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bismi")
 text = "Start Game"
 
-[node name="Seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Quitbtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 50)
+[node name="Quit" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bismi")
-theme_override_font_sizes/font_size = 64
 text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer2/Endless Mode" to="." method="_on_endless_mode_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Quit" to="." method="_on_quit_pressed"]

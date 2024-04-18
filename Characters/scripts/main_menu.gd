@@ -2,18 +2,17 @@ class_name Main_Menu
 extends Control
 
 
-@onready var startbtn = $MarginContainer/HBoxContainer/VBoxContainer/Startbtn as Button
-@onready var quitbtn = $MarginContainer/HBoxContainer/VBoxContainer/Quitbtn as Button
-@onready var start_level = preload("res://Level/game_level.tscn") as PackedScene
-
-
 func _ready():
-	startbtn.button_down.connect(on_start_pressed)
-	quitbtn.button_down.connect(on_exit_pressed)
+	pass
 
 
-func on_start_pressed() -> void:
-	get_tree().change_scene_to_packed(start_level)
+func _on_endless_mode_pressed():
+	ManagerGame.change_scene("res://Level/endless_level.tscn")
 
-func on_exit_pressed() -> void:
+
+func _on_start_pressed():
+	pass # Replace with function body.
+
+
+func _on_quit_pressed():
 	get_tree().quit()
