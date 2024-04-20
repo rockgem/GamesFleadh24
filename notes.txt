@@ -1,0 +1,29 @@
+1.Main menu is not fully working
+2.There are no levels yet in the game, there are a few working objects on the only level that i've done so far there is a 
+knight which has animation (not fully working) cow from the pack i downloaded from a free guide and a portal which triggers after you kill the slime.
+3.The fighting mechanic is not fully finished and is working incorrectly
+
+As i said, this is mostly a uni project for me and I don't need the game to be very big and long. Because the deadline is 
+quite soon all i'm hoping for is to get a clean working version of the game. I do have a few ideas which I believe not going 
+to take that much time to implement in the game. I also divided them into a few groups.
+
+Whenever the game starts the player sees main menu with "levels" option and "endless" option.
+
+Levels get user to one of two playable levels.
+First level should be knight slaying a few waves of slimes, second - a boss fight.
+
+After the first level is done user should receive a new dash ability from a chest.
+
+Opened portal which is going to display some text when player interacts with it and brings player to the second level.
+
+Second level where the bossfight happens, maybe if possible after boss is defeated to show some inventory tab.
+
+Endless level which is just going to spawn enemies.
+
+
+
+I think as for now that should be good enough for the game to be presented. 
+One more thing which is important that I want a lot of comments in the code where u are going to put changes. 
+It is really important for me to continue working on this project even after I do this demo on Monday. 
+I would like to learn from how you write code and continue working upon it. I'm not that experienced with Godot 
+from what u see so yeah, that'd be great for me.

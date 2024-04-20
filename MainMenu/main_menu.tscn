@@ -57,21 +57,21 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Endless Mode" type="Button" parent="VBoxContainer2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_bismi")
-text = "Endless Mode"
-
 [node name="Start" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bismi")
 text = "Start Game"
+
+[node name="Endless Mode" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bismi")
+text = "Endless Mode"
 
 [node name="Quit" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bismi")
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer2/Endless Mode" to="." method="_on_endless_mode_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Endless Mode" to="." method="_on_endless_mode_pressed"]
 [connection signal="pressed" from="VBoxContainer2/Quit" to="." method="_on_quit_pressed"]

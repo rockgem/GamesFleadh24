@@ -1,8 +1,14 @@
 extends Node
 
 
+@onready var df = preload("res://actors/objs/DamageFloater.tscn")
+
+
 signal fader_step_finished
 signal fader_finished
+
+var global_player_ref = null
+var global_map_ref = null
 
 
 func fade():

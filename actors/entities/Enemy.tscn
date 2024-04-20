@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd15krx7cebu8"]
+
+[ext_resource type="Script" path="res://actors/entities/Enemy.gd" id="1_mdp3q"]
+[ext_resource type="Texture2D" uid="uid://dg5xm5p42l61y" path="res://reso/sprites/enemies/Demon.tres" id="1_ttnqi"]
+[ext_resource type="PackedScene" uid="uid://ccjdsi0f8hieo" path="res://actors/components/Hurtbox.tscn" id="3_1rbbw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxrws"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y0lt5"]
+radius = 4.0
+
+[node name="Enemy" type="Node2D" groups=["Enemy"]]
+script = ExtResource("1_mdp3q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+texture = ExtResource("1_ttnqi")
+hframes = 8
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_1rbbw")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_yxrws")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_y0lt5")

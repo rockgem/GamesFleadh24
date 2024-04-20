@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://drd51g6fo5lmu"]
+
+[ext_resource type="Script" path="res://actors/objs/DamageFloater.gd" id="1_de4y5"]
+
+[node name="DamageFloater" type="Node2D"]
+script = ExtResource("1_de4y5")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -31.0
+offset_top = -5.0
+offset_right = 33.0
+offset_bottom = 10.0
+theme_override_font_sizes/font_size = 8
+text = "999"
+horizontal_alignment = 1
