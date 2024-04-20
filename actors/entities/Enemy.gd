@@ -13,3 +13,11 @@ func _physics_process(delta):
 
 func take_damage(damage = 1):
 	$Hurtbox.take_damage(damage)
+
+
+func death():
+	queue_free()
+
+
+func _on_hurtbox_zero():
+	death()

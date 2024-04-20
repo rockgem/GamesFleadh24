@@ -13,6 +13,9 @@ func take_damage(damage = 1):
 	d.get_node('Label').text = '%s' % damage
 	add_child(d)
 	
+	var fx = ManagerGame.hit_fx.instantiate()
+	add_child(fx)
+	
 	hit.emit()
 	
 	if hp <= 0:
