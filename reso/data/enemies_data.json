@@ -5,7 +5,7 @@
 	},
 	"Slime": {
 		"hp": 9,
-		"move_speed": 70.0
+		"move_speed": 30.0
 	},
 	"Pumpkin": {
 		"hp": 16,

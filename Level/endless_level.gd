@@ -2,8 +2,12 @@ extends Node2D
 
 
 @onready var enemy = preload("res://actors/entities/Enemy.tscn")
+@onready var spawn = preload("res://actors/objs/Spawn.tscn")
 
 var wave = 0
+var hp_multiplier = 1.0
+
+var enemy_variants = ['Demon', 'Slime', 'Pumpkin']
 
 
 func _ready():
@@ -52,11 +56,18 @@ func get_closest_enemy():
 
 func spawn_enemy(amount = 1):
 	for i in range(amount):
-		var e = enemy.instantiate()
-		e.global_position = get_random_spawn_point()
-		e.is_chaser_enemy = true
+		var s = spawn.instantiate()
+		s.global_position = get_random_spawn_point()
+		s.enemy = "res://actors/entities/Enemy.tscn"
+#		s.is_chaser_enemy = true
 		
-		add_child(e)
+		add_child(s)
+
+
+func spawn_obj(instance, g_pos):
+	instance.global_position = g_pos
+	
+	call_deferred('add_child', instance)
 
 
 func get_random_spawn_point():
@@ -70,7 +81,17 @@ func wave_start():
 	wave += 1
 	
 	$WaveTimer.start()
+	$SpawnTimer.start()
 	$CanvasLayer/UI/Wave.text = 'Wave %s' % wave
+
+
+func wave_end():
+	$WaveCooldown.start()
+	$SpawnTimer.stop()
+	
+	var enemies = get_tree().get_nodes_in_group('Enemy')
+	for e in enemies:
+		e.death()
 
 
 func _on_spawn_timer_timeout():
@@ -78,4 +99,8 @@ func _on_spawn_timer_timeout():
 
 
 func _on_wave_timer_timeout():
+	wave_end()
+
+
+func _on_wave_cooldown_timeout():
 	wave_start()
