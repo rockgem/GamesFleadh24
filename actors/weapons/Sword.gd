@@ -6,6 +6,9 @@ extends Node2D
 
 
 func attack():
+	if ManagerGame.global_map_ref == null:
+		return
+	
 	var e = ManagerGame.global_map_ref.get_closest_enemy()
 	
 	if e:

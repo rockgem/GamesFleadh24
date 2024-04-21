@@ -48,6 +48,7 @@ func spawn_enemy(amount = 1):
 	for i in range(amount):
 		var e = enemy.instantiate()
 		e.global_position = get_random_spawn_point()
+		e.is_chaser_enemy = true
 		
 		add_child(e)
 

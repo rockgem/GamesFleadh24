@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd15krx7cebu8"]
+[gd_scene load_steps=12 format=3 uid="uid://bd15krx7cebu8"]
 
 [ext_resource type="Script" path="res://actors/entities/Enemy.gd" id="1_mdp3q"]
 [ext_resource type="Texture2D" uid="uid://dg5xm5p42l61y" path="res://reso/sprites/enemies/Demon.tres" id="1_ttnqi"]
@@ -10,6 +10,83 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_y0lt5"]
 radius = 4.0
 
+[sub_resource type="Animation" id="Animation_x5h8t"]
+resource_name = "hit"
+length = 0.1
+step = 0.0333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333, 0.0666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(10, 10, 10, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0vl74"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_63l5g"]
+_data = {
+"RESET": SubResource("Animation_0vl74"),
+"hit": SubResource("Animation_x5h8t")
+}
+
+[sub_resource type="Animation" id="Animation_ndy3i"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_cyiwv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wpbev"]
+_data = {
+"RESET": SubResource("Animation_cyiwv"),
+"idle": SubResource("Animation_ndy3i")
+}
+
 [node name="Enemy" type="Node2D" groups=["Enemy"]]
 script = ExtResource("1_mdp3q")
 
@@ -17,6 +94,7 @@ script = ExtResource("1_mdp3q")
 position = Vector2(0, -7)
 texture = ExtResource("1_ttnqi")
 hframes = 8
+frame = 1
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_1rbbw")]
 
@@ -32,5 +110,16 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_y0lt5")
+
+[node name="HitAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_63l5g")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_wpbev")
+}
 
 [connection signal="zero" from="Hurtbox" to="." method="_on_hurtbox_zero"]

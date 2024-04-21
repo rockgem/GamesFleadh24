@@ -1,18 +1,30 @@
 extends Node2D
 
+@export var enemy_id = 'Demon'
+@export var is_chaser_enemy = false
 
 var move_speed = 80.0
-var hp
+
+
+func _ready():
+	var data = ManagerGame.enemies_data[enemy_id]
+	move_speed = data['move_speed']
+	$Hurtbox.hp = data['hp']
+	
+	$Sprite2D.texture = load("res://reso/sprites/enemies/%s.tres" % enemy_id)
 
 
 func _physics_process(delta):
-	var dif = global_position.direction_to(ManagerGame.global_player_ref.global_position)
-	
-	global_position += dif * move_speed * delta
+	if is_chaser_enemy:
+		var dif = global_position.direction_to(ManagerGame.global_player_ref.global_position)
+		
+		global_position += dif * move_speed * delta
 
 
 func take_damage(damage = 1):
 	$Hurtbox.take_damage(damage)
+	
+	$HitAnim.play("hit")
 
 
 func death():

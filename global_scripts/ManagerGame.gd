@@ -11,6 +11,8 @@ signal fader_finished
 var global_player_ref = null
 var global_map_ref = null
 
+@onready var enemies_data = get_data("res://reso/data/enemies_data.json")
+
 
 func fade():
 	var material = $CanvasLayer/Control/Fader.get('material')
@@ -41,3 +43,11 @@ func change_scene(path):
 	
 	await t.step_finished
 	get_tree().change_scene_to_file(path)
+
+
+func get_data(path):
+	var f = FileAccess.open(path, FileAccess.READ)
+	var j = JSON.new()
+	j.parse(f.get_as_text())
+	
+	return j.data
