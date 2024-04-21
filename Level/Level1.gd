@@ -36,7 +36,10 @@ func get_closest_enemy():
 
 
 func level_cleared():
-	get_tree().get_nodes_in_group('Portal')[0].activate()
+	var portals = get_tree().get_nodes_in_group('Portal')
+	
+	if portals.is_empty() == false:
+		portals[0].activate()
 
 
 func on_enemy_dead():

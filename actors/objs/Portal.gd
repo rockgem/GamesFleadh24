@@ -1,6 +1,6 @@
 extends Node2D
 
-
+@export var towards = ''
 
 func _ready():
 	activate(false)
@@ -20,4 +20,4 @@ func activate(b = true):
 
 
 func _on_area_2d_body_entered(body):
-	pass # Replace with function body.
+	ManagerGame.change_scene("res://Level/Level2.tscn")

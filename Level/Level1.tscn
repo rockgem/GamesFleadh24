@@ -78,3 +78,4 @@ enemy_id = "Pumpkin"
 
 [node name="Portal" parent="." instance=ExtResource("5_hhgi7")]
 position = Vector2(1031, 315)
+towards = "Level2"

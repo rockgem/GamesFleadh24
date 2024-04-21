@@ -10,5 +10,9 @@
 	"Pumpkin": {
 		"hp": 16,
 		"move_speed": 85.0
+	},
+	"Boss": {
+		"hp": 200,
+		"move_speed": 85.0
 	}
 }
