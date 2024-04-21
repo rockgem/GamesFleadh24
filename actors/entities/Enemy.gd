@@ -21,6 +21,11 @@ func _physics_process(delta):
 	if is_chaser_enemy:
 		var dif = global_position.direction_to(ManagerGame.global_player_ref.global_position)
 		
+		if dif.x < -0.5:
+			$Sprite2D.flip_h = true
+		else:
+			$Sprite2D.flip_h = false
+		
 		global_position += dif * move_speed * delta
 
 

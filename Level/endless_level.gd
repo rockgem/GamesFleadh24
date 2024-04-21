@@ -11,6 +11,8 @@ var enemy_variants = ['Demon', 'Slime', 'Pumpkin']
 
 
 func _ready():
+	get_tree().paused = false
+	
 	ManagerGame.game_over.connect(on_game_over)
 	
 	ManagerGame.global_map_ref = self
