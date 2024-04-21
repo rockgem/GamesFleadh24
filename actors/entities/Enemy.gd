@@ -28,6 +28,11 @@ func take_damage(damage = 1):
 
 
 func death():
+	set_physics_process(false)
+	$AnimationPlayer.play('death')
+	
+	await $AnimationPlayer.animation_finished
+	
 	queue_free()
 
 

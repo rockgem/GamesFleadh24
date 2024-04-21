@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1agbj6p4vjf4"]
+[gd_scene load_steps=14 format=3 uid="uid://d1agbj6p4vjf4"]
 
 [ext_resource type="Texture2D" uid="uid://cxy2nh7bqx7pd" path="res://Art/Enchanted Forest Characters with animations.png" id="1_tltqs"]
 [ext_resource type="Script" path="res://actors/entities/Player.gd" id="1_vyw4a"]
@@ -65,6 +65,44 @@ _data = {
 "walk": SubResource("Animation_nwd6d")
 }
 
+[sub_resource type="Animation" id="Animation_x5h8t"]
+resource_name = "hit"
+length = 0.1
+step = 0.0333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333, 0.0666),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(10, 10, 10, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0vl74"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_63l5g"]
+_data = {
+"RESET": SubResource("Animation_0vl74"),
+"hit": SubResource("Animation_x5h8t")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_f01j0"]
 
 [node name="Player" type="CharacterBody2D"]
@@ -89,6 +127,11 @@ shape = SubResource("CircleShape2D_13l8l")
 autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_atwg0")
+}
+
+[node name="HitAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_63l5g")
 }
 
 [node name="Sword" parent="." instance=ExtResource("3_16ft7")]

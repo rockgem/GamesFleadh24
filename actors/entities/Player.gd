@@ -28,3 +28,6 @@ func _on_hurtbox_area_entered(area):
 	# and the player will take damage
 	
 	area.get_parent().queue_free()
+	
+	$HitAnim.play("hit")
+
