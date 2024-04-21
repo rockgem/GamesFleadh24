@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8lr0yq43oiyl"]
+
+[ext_resource type="Texture2D" uid="uid://07mo1iiv0jhn" path="res://Art/Dimensional_Portal.png" id="1_k6go1"]
+[ext_resource type="Script" path="res://actors/objs/Portal.gd" id="1_kjjrq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ftx8"]
+atlas = ExtResource("1_k6go1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2clxx"]
+atlas = ExtResource("1_k6go1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_banch"]
+atlas = ExtResource("1_k6go1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhxcu"]
+atlas = ExtResource("1_k6go1")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enea6"]
+atlas = ExtResource("1_k6go1")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap3yp"]
+atlas = ExtResource("1_k6go1")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h6r86"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ftx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2clxx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_banch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhxcu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enea6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap3yp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_22vf2"]
+radius = 6.0
+height = 28.0
+
+[node name="Portal" type="Node2D" groups=["Portal"]]
+script = ExtResource("1_kjjrq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h6r86")
+autoplay = "default"
+frame_progress = 0.893755
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_22vf2")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

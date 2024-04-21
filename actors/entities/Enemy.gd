@@ -1,7 +1,10 @@
 extends Node2D
 
+signal dead
+
 @export var enemy_id = 'Demon'
 @export var is_chaser_enemy = false
+var is_dead = false
 
 var move_speed = 80.0
 
@@ -28,10 +31,13 @@ func take_damage(damage = 1):
 
 
 func death():
+	is_dead = true
 	set_physics_process(false)
 	$AnimationPlayer.play('death')
 	
 	await $AnimationPlayer.animation_finished
+	
+	dead.emit()
 	
 	queue_free()
 

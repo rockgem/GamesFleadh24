@@ -35,11 +35,17 @@ func get_closest_enemy():
 	
 	
 	for e in enemies:
+		if e.is_dead:
+			continue
+		
 		var d = ManagerGame.global_player_ref.global_position.distance_to(e.global_position)
 		
 		if d < distance:
 			distance = d
 			enemy = e
+	
+	if enemy.is_dead:
+		enemy = null
 	
 	return enemy
 
