@@ -16,6 +16,12 @@ func _physics_process(delta):
 	velocity.x = Input.get_axis('left', 'right') * move_speed
 	velocity.y = Input.get_axis('up', 'down') * move_speed
 	
+	if velocity != Vector2.ZERO:
+		if velocity.x < -0.5:
+			$Sprite2D.flip_h = true
+		else:
+			$Sprite2D.flip_h = false
+	
 	velocity.normalized()
 	
 	move_and_slide()
