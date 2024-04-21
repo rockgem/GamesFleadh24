@@ -7,7 +7,7 @@ extends Node2D
 var wave = 0
 var hp_multiplier = 1.0
 
-var enemy_variants = ['Demon', 'Slime', 'Pumpkin']
+var enemy_variants = ['Demon', 'Slime']
 
 
 func _ready():
