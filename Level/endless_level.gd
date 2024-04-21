@@ -11,6 +11,8 @@ var enemy_variants = ['Demon', 'Slime', 'Pumpkin']
 
 
 func _ready():
+	ManagerGame.game_over.connect(on_game_over)
+	
 	ManagerGame.global_map_ref = self
 	
 	$CanvasLayer/UI/Control/HP.value = ManagerGame.global_player_ref.hurtbox.hp
@@ -92,6 +94,12 @@ func wave_end():
 	var enemies = get_tree().get_nodes_in_group('Enemy')
 	for e in enemies:
 		e.death()
+
+
+func on_game_over():
+	get_tree().paused = true
+	
+	$CanvasLayer/UI/GameOverControl.show()
 
 
 func _on_spawn_timer_timeout():

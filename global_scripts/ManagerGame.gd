@@ -1,5 +1,7 @@
 extends Node
 
+signal game_over
+
 
 @onready var df = preload("res://actors/objs/DamageFloater.tscn")
 @onready var hit_fx = preload("res://actors/objs/HitFX.tscn")

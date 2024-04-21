@@ -27,6 +27,10 @@ func _physics_process(delta):
 	move_and_slide()
 
 
+func death():
+	ManagerGame.game_over.emit()
+
+
 func _on_hurtbox_area_entered(area):
 	# since i know that this area only detects enemy's area2d, i will then get the 
 	# parent and delete the enemy scene right away.
@@ -37,3 +41,11 @@ func _on_hurtbox_area_entered(area):
 	
 	$HitAnim.play("hit")
 
+
+
+func _on_hurtbox_hit():
+	pass # Replace with function body.
+
+
+func _on_hurtbox_zero():
+	death()

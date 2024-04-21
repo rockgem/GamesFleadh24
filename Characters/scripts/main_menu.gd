@@ -3,7 +3,7 @@ extends Control
 
 
 func _ready():
-	pass
+	get_tree().paused = false
 
 
 func _on_endless_mode_pressed():

@@ -145,3 +145,5 @@ position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_f01j0")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="hit" from="Hurtbox" to="." method="_on_hurtbox_hit"]
+[connection signal="zero" from="Hurtbox" to="." method="_on_hurtbox_zero"]
