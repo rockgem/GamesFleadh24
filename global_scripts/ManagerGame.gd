@@ -13,6 +13,7 @@ signal fader_finished
 var global_player_ref = null
 var global_map_ref = null
 
+@onready var player_data = get_data("res://reso/data/player_data.json")
 @onready var enemies_data = get_data("res://reso/data/enemies_data.json")
 
 

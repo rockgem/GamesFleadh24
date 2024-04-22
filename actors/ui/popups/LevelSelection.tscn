@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwpqijrj4lq2h"]
+
+[ext_resource type="PackedScene" uid="uid://dlb3anwidclyv" path="res://actors/ui/LevelSelectDisplay.tscn" id="1_2qq5e"]
+[ext_resource type="Script" path="res://actors/ui/popups/LevelSelection.gd" id="1_6bss4"]
+[ext_resource type="Texture2D" uid="uid://bajfnh5e887mh" path="res://Art/0x72_DungeonTilesetII_v1.6.png" id="2_ghnbt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uapu6"]
+bg_color = Color(0.4, 0.286275, 0.227451, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fa7l"]
+atlas = ExtResource("2_ghnbt")
+region = Rect2(352, 368, 16, 16)
+
+[node name="LevelSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_6bss4")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 189.0
+offset_top = 75.0
+offset_right = -189.0
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uapu6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Level Selection"
+horizontal_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="LevelSelectDisplay" parent="Panel/VBoxContainer/HFlowContainer" instance=ExtResource("1_2qq5e")]
+layout_mode = 2
+
+[node name="LevelSelectDisplay2" parent="Panel/VBoxContainer/HFlowContainer" instance=ExtResource("1_2qq5e")]
+layout_mode = 2
+level_index = 2.0
+
+[node name="LevelSelectionClose" type="TextureButton" parent="Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_top = 3.0
+offset_right = -2.0
+offset_bottom = 19.0
+grow_horizontal = 0
+texture_normal = SubResource("AtlasTexture_4fa7l")
+texture_pressed = SubResource("AtlasTexture_4fa7l")
+texture_hover = SubResource("AtlasTexture_4fa7l")
+texture_focused = SubResource("AtlasTexture_4fa7l")
+
+[connection signal="pressed" from="Panel/LevelSelectionClose" to="." method="_on_level_selection_close_pressed"]

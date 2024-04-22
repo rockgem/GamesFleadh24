@@ -13,7 +13,7 @@ process_mode = 3
 script = ExtResource("1_pilw0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 100
+layer = 101
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3

@@ -14,6 +14,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_eef5k")
 
+[node name="Popups" type="CanvasLayer" parent="."]
+layer = 100
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -59,16 +62,19 @@ alignment = 1
 
 [node name="Start" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("3_bismi")
 text = "Start Game"
 
 [node name="Endless Mode" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("3_bismi")
 text = "Endless Mode"
 
 [node name="Quit" type="Button" parent="VBoxContainer2"]
 layout_mode = 2
+focus_mode = 0
 theme_override_fonts/font = ExtResource("3_bismi")
 text = "Quit"
 
