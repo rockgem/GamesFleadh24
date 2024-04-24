@@ -73,4 +73,19 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_22vf2")
 
+[node name="Label" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = -25.0
+offset_right = 78.0
+offset_bottom = -13.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 7
+text = "Press \"F\" to teleport"
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
