@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://d1agbj6p4vjf4"]
+[gd_scene load_steps=15 format=3 uid="uid://d1agbj6p4vjf4"]
 
 [ext_resource type="Texture2D" uid="uid://cxy2nh7bqx7pd" path="res://Art/Enchanted Forest Characters with animations.png" id="1_tltqs"]
 [ext_resource type="Script" path="res://actors/entities/Player.gd" id="1_vyw4a"]
+[ext_resource type="PackedScene" uid="uid://b2qdw8yanxnog" path="res://actors/ui/PlayerUI.tscn" id="2_cng1a"]
 [ext_resource type="PackedScene" uid="uid://cyy2hdi8qw63f" path="res://actors/weapons/Sword.tscn" id="3_16ft7"]
 [ext_resource type="PackedScene" uid="uid://ccjdsi0f8hieo" path="res://actors/components/Hurtbox.tscn" id="4_dpdll"]
 
@@ -107,6 +108,10 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_vyw4a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" parent="CanvasLayer" instance=ExtResource("2_cng1a")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.4, 1.4)
